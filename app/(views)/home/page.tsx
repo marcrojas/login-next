@@ -30,6 +30,13 @@ export default function home() {
     
         fetchUser();
       }, [router]);
+
+
+      const logout = async () => {
+        await fetch('/api/logout', { method: 'POST' });
+        router.push('/');
+      };
+
   
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-green-100">
@@ -37,7 +44,7 @@ export default function home() {
           ¡Bienvenido{user ? `, ${user.nombre}` : ''} al Home!
         </h1>
         <button
-          
+          onClick={logout}
           className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
           Cerrar Sesión
