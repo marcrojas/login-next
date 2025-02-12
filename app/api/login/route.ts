@@ -52,6 +52,7 @@ export async function POST(req: Request) {
         });
 
       } catch (error) {
+        console.error(error);
         return new Response(JSON.stringify({ message: 'Error en el servidor' }), {
           status: 500,
         });

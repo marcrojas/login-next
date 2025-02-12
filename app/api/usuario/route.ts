@@ -28,6 +28,7 @@ export async function GET(req: Request) {
   
       return NextResponse.json({ user: user[0] }, { status: 200 });
     } catch (error) {
+      console.error(error);
       return NextResponse.json({ message: 'Token inválido' }, { status: 401 });
     }
   }

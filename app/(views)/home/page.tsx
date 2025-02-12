@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 
-export default function home() {
+export default function Home() {
     const router = useRouter();
     const [user, setUser] = useState<{ nombre: string } | null>(null);
   
