@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-export default function registro() {
+export default function Registro() {
 
     const [nombre, setName] = useState('');
     const [correo, setEmail] = useState('');
@@ -31,6 +32,7 @@ export default function registro() {
             setError(data.message);
           }
         } catch (err) {
+          console.error('Error en el registro:', err);
           setError('Error al conectarse.');
         }
       };
@@ -76,9 +78,9 @@ export default function registro() {
             </form>
             <p className="text-center text-sm text-gray-600 mt-4">
               ¿Ya tienes una cuenta?{' '}
-              <a href="/" className="text-blue-600 hover:underline">
+              <Link href="/" className="text-blue-600 hover:underline">
                 Inicia sesión aquí
-              </a>
+              </Link>
             </p>
           </div>
         </div>
