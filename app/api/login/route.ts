@@ -34,9 +34,17 @@ export async function POST(req: Request) {
           });
         }
 
-        //Guardo el resultado de la consulta en un arreglo de objeto
-        const user = (rows as any[])[0];
 
+        interface User {
+          id: number;
+          nombre: string;
+          correo: string;
+        }
+        
+        const user = (rows as User[])[0];
+
+        //Guardo el resultado de la consulta en un arreglo de objeto
+       
         //Genero el token a partir del ID del usuario el cual expirara dentro de 1 hora
         const token = jwt.sign({ userId: user.id }, SECRET_KEY, {
           expiresIn: '1h',

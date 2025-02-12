@@ -31,6 +31,7 @@ export default function Home() {
         setError(data.message);
       }
     } catch (err) {
+      console.error('Error en el registro:', err);
       setError('Error al conectarse.');
     }
   };

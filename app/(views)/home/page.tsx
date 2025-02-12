@@ -24,6 +24,7 @@ export default function Home() {
               router.push('/'); // Redirige al login si el token generado no es válido
             }
           } catch (err) {
+            console.error(err);
             router.push('/'); // Si hay un error en la conexión, redirigo al login
           }
         };

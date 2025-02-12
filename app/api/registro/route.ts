@@ -1,5 +1,6 @@
 import { db } from '../../conexion/db';
 import crypto from 'crypto';
+import { RowDataPacket } from 'mysql2';
 
 export async function POST(req: Request) {
 
@@ -13,10 +14,18 @@ export async function POST(req: Request) {
             });
         }
 
-        //Aquí verifico si el correo ya existe
-        const [existeUsuario] = await db.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
 
-        if ((existeUsuario as any[]).length > 0) {
+        interface Usuario extends RowDataPacket {
+            id: number;
+            nombre: string;
+            correo: string;
+          }
+
+        //Aquí verifico si el correo ya existe
+        const [rows] = await db.query<Usuario[]>('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+
+        
+        if (rows.length > 0) {
             return new Response(JSON.stringify({ message: 'El correo ya está registrado' }), {
                 status: 409,
             });

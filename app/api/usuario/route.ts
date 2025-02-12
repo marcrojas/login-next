@@ -17,12 +17,19 @@ export async function GET(req: Request) {
     try {
       const decoded = jwt.verify(token, SECRET_KEY) as { userId: number };
 
-      const [user] = await db.query<RowDataPacket[]>(
+
+      interface Usuario extends RowDataPacket {
+        id: number;
+        nombre: string;
+        correo: string;
+      }
+
+      const [user] = await db.query<Usuario[]>(
         'SELECT nombre FROM usuarios WHERE id = ?',
         [decoded.userId]
       );
-  
-      if ((user as any[]).length === 0) {
+
+      if (user.length === 0) {
         return NextResponse.json({ message: 'Usuario no encontrado' }, { status: 404 });
       }
   
